@@ -1,0 +1,74 @@
+#include<iostream>
+#include<conio.h>
+#include<iomanip>
+#include<stdio.h>
+
+using namespace std;
+
+void nhapmt(float a[20][20], int m, int n)
+{
+    int i, j;
+    cout<<"\n Nhap gia tri cac phan tu:";
+    for( i = 1; i <= m; ++i)
+        for(j = 1; j <= n; ++j)
+    {
+        cout<<"\n a["<<i<<","<<j<<"]=";
+        cin>>a[i][j];
+    }
+}
+void inmt(float a[20][20], int m, int n)
+{
+    int i, j;
+    for(i = 1; i <= m; ++i)
+    {
+             cout<<"\n";
+             for(j = 1; j <= n; ++j)
+            {
+                cout<<setw(3)<<a[i][j];
+            }
+
+    }
+
+}
+
+void max_min(float *a, int n,int &vtmax, int &vtmin)
+{
+    int i;
+    vtmin = vtmin = 1;
+    for(i = 2; i <= n; ++i)
+    {
+        if(a[i] > a[vtmax])
+            vtmax = i;
+        if(a[i] < a[vtmin])
+            vtmin = i;
+    }
+}
+
+int main()
+{
+    float a[20][20];
+    int m, n, i;
+    do
+    {
+        cout<<"\n Nhap so hang va so cot cua ma tran:";
+        cin>>m>>n;
+        if(m>20 && n>20)
+        {
+            cout<<"\n Yeu cau nhap lai so hang va so cot";
+        }
+    }while(m>20&&n>20);
+    nhapmt(a, m, n);
+    inmt(a, m, n);
+    float *p = (float *)a;
+    int vtmax, vtmin;
+    for(i = 1; i <= m; ++i)
+    {
+      p = ((float*)a) + i*20;
+      max_min(p,n,vtmax,vtmin);
+      printf("\n Hang %d Phan tu max = %6.1f tai cot %d",i, p[vtmax], vtmax);
+      printf("\n Phan tu min =%6.1f tai cot %d", p[vtmin], vtmin);
+    }
+
+    getch();
+    return 1;
+}
